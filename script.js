@@ -60,7 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 advice = "☀️ No rain today! You should water the crops.";
             }
 
-            adviceText.innerHTML = translateText(advice);
+            adviceText.dataset.advice = advice; // Store original advice for translation
+            updateTranslation();
 
         } catch (err) {
             console.error("❌ Error Fetching Weather Data:", err.message);
@@ -68,28 +69,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 🌎 Translate text based on selected language
-    function translateText(text) {
-        const translations = {
-            "en": text,
-            "ta": {
-                "🚨 Heavy Rain Alert! Avoid farming today.": "🚨 கனமழை எச்சரிக்கை! இன்று விவசாயம் செய்ய வேண்டாம்.",
-                "🌦️ Light rain expected. Use proper drainage.": "🌦️ சிறிய மழை எதிர்பார்க்கப்படுகிறது. சரியான வடிகால் பயன்படுத்து.",
-                "☀️ No rain today! You should water the crops.": "☀️ இன்று மழை இல்லை! பயிர்களுக்கு நீர் கொடு."
-            },
-            "hi": {
-                "🚨 Heavy Rain Alert! Avoid farming today.": "🚨 भारी बारिश की चेतावनी! आज खेती से बचें।",
-                "🌦️ Light rain expected. Use proper drainage.": "🌦️ हल्की बारिश की संभावना। उचित जल निकासी का उपयोग करें।",
-                "☀️ No rain today! You should water the crops.": "☀️ आज बारिश नहीं! फसलों को पानी दें।"
-            }
-        };
+    // 🌎 Translation dictionary
+    const translations = {
+        "en": {
+            "🚨 Heavy Rain Alert! Avoid farming today.": "🚨 Heavy Rain Alert! Avoid farming today.",
+            "🌦️ Light rain expected. Use proper drainage.": "🌦️ Light rain expected. Use proper drainage.",
+            "☀️ No rain today! You should water the crops.": "☀️ No rain today! You should water the crops."
+        },
+        "ta": { // Tamil 🇮🇳
+            "🚨 Heavy Rain Alert! Avoid farming today.": "🚨 கனமழை எச்சரிக்கை! இன்று விவசாயம் செய்ய வேண்டாம்.",
+            "🌦️ Light rain expected. Use proper drainage.": "🌦️ சிறிய மழை எதிர்பார்க்கப்படுகிறது. சரியான வடிகால் பயன்படுத்து.",
+            "☀️ No rain today! You should water the crops.": "☀️ இன்று மழை இல்லை! பயிர்களுக்கு நீர் கொடு."
+        },
+        "hi": { // Hindi 🇮🇳
+            "🚨 Heavy Rain Alert! Avoid farming today.": "🚨 भारी बारिश की चेतावनी! आज खेती से बचें।",
+            "🌦️ Light rain expected. Use proper drainage.": "🌦️ हल्की बारिश की संभावना। उचित जल निकासी का उपयोग करें।",
+            "☀️ No rain today! You should water the crops.": "☀️ आज बारिश नहीं! फसलों को पानी दें।"
+        },
+        "fr": { // French 🇫🇷
+            "🚨 Heavy Rain Alert! Avoid farming today.": "🚨 Alerte forte pluie ! Évitez l'agriculture aujourd'hui.",
+            "🌦️ Light rain expected. Use proper drainage.": "🌦️ Pluie légère attendue. Utilisez un drainage approprié.",
+            "☀️ No rain today! You should water the crops.": "☀️ Pas de pluie aujourd'hui ! Vous devez arroser les cultures."
+        },
+        "es": { // Spanish 🇪🇸
+            "🚨 Heavy Rain Alert! Avoid farming today.": "🚨 Alerta de lluvia intensa! Evita la agricultura hoy.",
+            "🌦️ Light rain expected. Use proper drainage.": "🌦️ Se espera lluvia ligera. Usa un drenaje adecuado.",
+            "☀️ No rain today! You should water the crops.": "☀️ No hay lluvia hoy! Debes regar los cultivos."
+        }
+    };
 
-        const lang = languageSelect.value;
-        return translations[lang]?.[text] || text;
+    // Function to update translation
+    function updateTranslation() {
+        const selectedLang = languageSelect.value;
+        const originalText = adviceText.dataset.advice;
+        adviceText.innerHTML = translations[selectedLang]?.[originalText] || originalText;
     }
 
-    // Update translation on language change
-    languageSelect.addEventListener("change", () => {
-        adviceText.innerHTML = translateText(adviceText.innerHTML);
-    });
+    // Change translation when language is selected
+    languageSelect.addEventListener("change", updateTranslation);
 });
