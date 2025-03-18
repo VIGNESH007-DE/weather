@@ -3,20 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Alert for Farmers</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Weather Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input { padding: 8px; margin: 10px; }
+        button { padding: 10px 15px; background: blue; color: white; border: none; cursor: pointer; }
+        #weather { margin-top: 20px; font-size: 18px; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Weather Alert System</h1>
-        <p>Check if today's weather is suitable for farming</p>
-        
-        <input type="text" id="city" placeholder="Enter your city">
-        <button onclick="getWeather()">Check Weather</button>
+    <h1>Weather Checker</h1>
+    <input type="text" id="city" placeholder="Enter city name" />
+    <button onclick="getWeather()">Check Weather</button>
+    <div id="weather"></div>
 
-        <div id="weatherResult"></div>
-    </div>
+    <script>
+        async function getWeather() {
+            let city = document.getElementById("city").value || "Delhi"; // Default city
+            let apiKey = "5c83d108bd45499e97f111053251803"; // Replace with your API Key
+            let url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
-    <script src="script.js"></script>
+            try {
+                let response = await fetch(url);
+                let data = await response.json();
+                
+                document.getElementById("weather").innerHTML = `
+                    🌍 Location: ${data.location.name}, ${data.location.country}<br>
+                    🌡️ Temperature: ${data.current.temp_c}°C<br>
+                    ☔ Rain: ${data.current.precip_mm} mm<br>
+                    💧 Humidity: ${data.current.humidity}%
+                `;
+            } catch (error) {
+                document.getElementById("weather").innerHTML = "❌ Error fetching weather data!";
+            }
+        }
+    </script>
 </body>
 </html>
