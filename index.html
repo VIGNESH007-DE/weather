@@ -5,22 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Matrix Weather Alerter</title>
     <link rel="stylesheet" href="style.css">
+    <script src="translations.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <!-- Welcome Popup -->
     <div id="welcomePopup" class="popup">
         <div class="popup-content">
-            <h2>🌾 Welcome to Farm Matrix Weather Alerter! 🌦️</h2>
-            <p>Your smart assistant for better farming decisions.</p>
+            <h2 id="welcomeTitle">🌾 Welcome to Farm Matrix Weather Alerter! 🌦️</h2>
+            <p id="welcomeMessage">Your smart assistant for better farming decisions.</p>
             <button onclick="closePopup()">Get Started</button>
         </div>
     </div>
 
-    <h1>🌾 Farm Matrix Weather Alerter 🌦️</h1>
+    <h1 id="mainTitle">🌾 Farm Matrix Weather Alerter 🌦️</h1>
+
     <div class="container">
-        <input type="text" id="city" placeholder="Enter city name" />
-        <button onclick="getWeather()">Check Weather</button>
+        <label for="languageSelect" id="languageLabel">🌍 Choose Language:</label>
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="hi">हिन्दी</option>
+            <option value="fr">Français</option>
+            <option value="ta">தமிழ்</option>
+            <option value="zh">中文</option>
+        </select>
+        <button id="getLocationBtn" onclick="getUserLocation()">🌍 Get My Location</button>
         <div id="weather"></div>
         <div id="advice"></div>
     </div>
