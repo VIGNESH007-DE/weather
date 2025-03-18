@@ -1,67 +1,29 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #3A7BD5, #00d2ff);
+    background: linear-gradient(to right, #2b5876, #4e4376);
     color: white;
     text-align: center;
-    padding: 50px;
-}
-
-h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.container {
-    background: rgba(255, 255, 255, 0.2);
     padding: 20px;
-    border-radius: 10px;
-    width: 350px;
-    margin: auto;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-input {
-    padding: 10px;
-    width: 80%;
-    border: none;
-    border-radius: 5px;
-    margin: 10px;
-    font-size: 16px;
-}
-
-button {
-    padding: 10px 20px;
-    background: #ff8c00;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background: #e07b00;
-}
-
-#weather, #advice {
-    margin-top: 20px;
-    font-size: 18px;
-    background: rgba(255, 255, 255, 0.3);
-    padding: 15px;
-    border-radius: 8px;
-}
-
-/* Popup Style */
+/* Welcome Popup */
 .popup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
 }
 
 .popup-content {
@@ -70,22 +32,85 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    width: 300px;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.popup-content h2 {
+.popup-content button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    background: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.popup-content button:hover {
+    background: #388E3C;
+}
+
+/* Container Styling */
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: inline-block;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Select Box */
+select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
     margin-bottom: 10px;
 }
 
-.popup button {
-    padding: 8px 15px;
-    margin-top: 10px;
-    background: #ff8c00;
-    color: white;
+/* Get Location Button */
+#getLocationBtn {
+    padding: 10px 15px;
+    background: #ff9800;
     border: none;
+    color: white;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
-.popup button:hover {
-    background: #e07b00;
+#getLocationBtn:hover {
+    background: #e68900;
+}
+
+/* Weather and Advice Display */
+#weather, #advice {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
